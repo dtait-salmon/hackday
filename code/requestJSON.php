@@ -1,0 +1,3 @@
+<?php
+
+/* Request JSON-LD */
