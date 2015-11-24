@@ -25,6 +25,7 @@ var hackday = hackday || {};
   hackday = (function () {
 
     var jsonStruc;
+    var currentUrl;
     var form = $('#jsonForm');
 
     var methods = {
@@ -64,16 +65,11 @@ var hackday = hackday || {};
           }
         };
 
-        //console.log(JSON.stringify(jsonStruc));
-
       },
       /**
        *
        */
       populateHiddenFields: function () {
-        // url
-        // json object
-
         //JSON.stringify(jsonStruc);
         form.find('input[id="jsonInput"]').val(JSON.stringify(jsonStruc));
 
@@ -90,6 +86,7 @@ var hackday = hackday || {};
         $('#urlList li a').on('click', function(){
           // grab url and put in hidden field
           form.find('input[id="urlInput"]').val($(this).val());
+          currentUrl = $(this).val();
         });
 
         $('#submitButton').on('click', function(e){
@@ -99,7 +96,24 @@ var hackday = hackday || {};
           methods.populateHiddenFields();
           methods.resetForm();
 
-          $(this).submit();
+          var data = {
+            url: currentUrl,
+            jsonStr: JSON.stringify(jsonStruc)
+          }
+
+          // send back to server (ajax)
+          $.ajax({
+            type: "POST",
+            url: 'code/submitJSON.php',
+            data: data,
+            success: function(response){
+              console.log(response);
+              //$('#jsonForm').modal('hide');
+            },
+
+            dataType: 'jsonp'
+          });
+
         });
 
         $('#closeModal').on('click', function(){
