@@ -23,7 +23,12 @@
         <p>Hello world! This is HTML5 Boilerplate.</p>
         <ul id="urlList"></ul>
 
-		<form action="code/submitJSON.php" method="post">
+		<form id="jsonForm" action="code/submitJSON.php" method="post">
+
+            <input type="text" value="test1_value" name="test1" id="test1"/>
+            <input type="text" value="test2_value" name="test2" id="test2"/>
+            <input type="text" value="test3_value" name="test3" id="test3"/>
+
 			<input type="text" name="url" id="urlInput"/>
 			<input type="text" name="jsonStr" id="jsonInput"/>
 			<input type="submit" value="submit" />
