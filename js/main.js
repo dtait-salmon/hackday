@@ -25,6 +25,7 @@ var hackday = hackday || {};
   hackday = (function () {
 
     var jsonStruc;
+    var form = $('#jsonForm');
 
     var methods = {
       /**
@@ -33,66 +34,72 @@ var hackday = hackday || {};
       setJasonValues: function () {
 
         // get field values
-        var form = $('#jsonForm');
-
         jsonStruc = {
-          "@context": "http://schema.org/" + form.find('input[id="context"]'),
-          "@type": form.find('input[id="product"]'),
-          "name": form.find('input[id="name"]'),
-          "image": form.find('input[id="image"]'),
-          "description": form.find('input[id="description"]'),
-          "mpn": form.find('input[id="mpn"]'),
+          "@context": "http://schema.org/" + form.find('input[id="context"]').val() || "",
+          "@type": form.find('input[id="type"]').val() || "",
+          "name": form.find('input[id="name"]').val() || "",
+          "image": form.find('input[id="image"]').val() || "",
+          "description": form.find('input[id="description"]').val() || "",
+          "mpn": form.find('input[id="mpn"]').val() || "",
           "brand": {
-            "@type": form.find('input[id="brand_type"]'),
-            "name": form.find('input[id="brand_name"]')
+            "@type": form.find('input[id="brand_type"]').val() || "",
+            "name": form.find('input[id="brand_name"]').val() || ""
           },
           "aggregateRating": {
-            "@type": form.find('input[id="aggregateRating_type"]'),
-            "ratingValue": form.find('input[id="aggregateRating_ratingValue"]'),
-            "reviewCount": form.find('input[id="aggregateRating_reviewCount"]')
+            "@type": form.find('input[id="aggregateRating_type"]').val() || "",
+            "ratingValue": form.find('input[id="aggregateRating_ratingValue"]').val() || "",
+            "reviewCount": form.find('input[id="aggregateRating_reviewCount"]').val() || ""
           },
           "offers": {
-            "@type": form.find('input[id="offers_type"]'),
-            "priceCurrency": form.find('input[id="offers_priceCurrency"]'),
-            "price": form.find('input[id="offers_price"]'),
-            "priceValidUntil": form.find('input[id="offers_priceValidUntil"]'),
-            "itemCondition": "http://schema.org/" + form.find('input[id="offers_itemCondition"]'),
-            "availability": "http://schema.org/" + form.find('input[id="offers_availability"]'),
+            "@type": form.find('input[id="offers_type"]').val() || "",
+            "priceCurrency": form.find('input[id="offers_priceCurrency"]').val() || "",
+            "price": form.find('input[id="offers_price"]').val() || "",
+            "priceValidUntil": form.find('input[id="offers_priceValidUntil"]').val() || "",
+            "itemCondition": "http://schema.org/" + form.find('input[id="offers_itemCondition"]').val() || "",
+            "availability": "http://schema.org/" + form.find('input[id="offers_availability"]').val() || "",
             "seller": {
-              "@type": form.find('input[id="seller_type"]'),
-              "name": form.find('input[id="seller_name"]')
+              "@type": form.find('input[id="offers_seller_type"]').val() || "",
+              "name": form.find('input[id="offers_seller_name"]').val() || ""
             }
           }
         };
 
-        console.log(jsonStruc);
-
-        //
-        //
-        //var inputs = $(form).find('input').not('input[type="hidden"]').not('input[type="submit"]');
-        //
-        //inputs.each(function () {
-        //  var $this = this;
-        //
-        //
-        //})
-
+        console.log(JSON.stringify(jsonStruc));
 
       },
       /**
        *
        */
       populateHiddenFields: function () {
+        // url
+        // json object
+        form.find('input[id="urlInput"]').val(window.location);
+        JSON.parse(jsonStruc);
+        //form.find('input[id="jsonInput"]').val(JSON.parse(jsonStruc));
 
-
+      },
+      resetForm: function(){
+        form[0].reset();
       }
     };
 
     // public methods
     var api = {
       init: function () {
-        methods.setJasonValues();
-        methods.populateHiddenFields();
+
+        $('#submitButton').on('click', function(e){
+          e.preventDefault();
+
+          methods.setJasonValues();
+          methods.populateHiddenFields();
+          methods.resetForm();
+
+          $(this).submit();
+        });
+
+        $('#closeModal').on('click', function(){
+          methods.resetForm();
+        });
 
         return;
       }
