@@ -70,7 +70,11 @@ var hackday = hackday || {};
        *
        */
       populateHiddenFields: function () {
-        //JSON.stringify(jsonStruc);
+        // url
+        // json object
+        jsonStruc = JSON.stringify(jsonStruc);
+        jsonStruc = $.parseJSON(jsonStruc);
+
         form.find('input[id="jsonInput"]').val(JSON.stringify(jsonStruc));
 
       },
