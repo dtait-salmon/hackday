@@ -1,17 +1,40 @@
-$(document).ready(function(){
+$(document).ready(function() {
 
+    var monthNames = [
+        "January", "February", "March",
+        "April", "May", "June", "July",
+        "August", "September", "October",
+        "November", "December"
+    ];
 
-  $('#urlList').on('click', 'a', function(e){
-    e.preventDefault();
+    var date = new Date();
+    var day = date.getDate();
+    var monthIndex = date.getMonth();
+    var year = date.getFullYear();
 
-    var url = $(this).text();
-    var jsonStr = $(this).attr('data-value');
+    $('#urlList').on('click', 'a', function(e) {
+        e.preventDefault();
 
-    $('#urlInput').val(url);
-    $('#jsonInput').val(jsonStr);
-  });
+        var url = $(this).text();
+        var jsonStr = $(this).attr('data-value');
+
+        $('#urlInput').val(url);
+        $('#jsonInput').val(jsonStr);
+    });
+    $("#datetimepicker").datetimepicker({
+        format: "dd MM yyyy",
+        autoclose: true,
+        todayBtn: true,
+        pickerPosition: "bottom",
+        minView: 2,
+        todayHighlight: true,
+        startView: 4
+    });
+
+    $('#jsonModal').on('shown.bs.modal', function(e) {
+        document.getElementById('aggregate_priceValidUntil').value = day + ' ' + monthNames[monthIndex] + ' ' + year;
+    })
 });
-
 
 var hackday = hackday || {};
 
