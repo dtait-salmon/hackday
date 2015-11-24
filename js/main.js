@@ -1,9 +1,5 @@
 $(document).ready(function(){
-  $.getJSON("code/requestItems.php", function(result){
-      $.each(result, function(i){
-        $('#urlList').append('<li><a data-toggle="modal" data-target="#jsonModal" href="#" data-value="'+ result[i].jsonld +'">'+ result[i].url +'</a></li>');
-      });
-  });
+
 
   $('#urlList').on('click', 'a', function(e){
     e.preventDefault();
@@ -105,19 +101,13 @@ var hackday = hackday || {};
             jsonStr: JSON.stringify(jsonStruc)
           }
 
-          // send back to server (ajax)
-          $.ajax({
-            type: "POST",
-            url: 'code/submitJSON.php',
-            data: data,
-            success: function(response){
-              console.log(response);
-              //$('#jsonForm').modal('hide');
-            },
-
-            dataType: 'jsonp'
+          jQuery.ajax({
+            method: "POST",
+            url: "code/submitJSON.php",
+            data: data
+          }).done(function(response) {
+            console.log(response);
           });
-
         });
 
         $('#closeModal').on('click', function(){
