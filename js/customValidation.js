@@ -9,7 +9,13 @@ var formValidator = (function() {
 
         // Form validators
         .formValidation({
-            framework: 'bootstrap'
+            framework: 'bootstrap',
+            live: 'enabled',
+            trigger: 'blur',
+            icon: {
+                valid: 'glyphicon glyphicon-ok',
+                invalid: 'glyphicon glyphicon-remove',
+            }
         });
     };
 
@@ -17,7 +23,6 @@ var formValidator = (function() {
     return {
         init: init
     };
-    // Two () immediately invoke function
 })();
 
 // On DOM ready run init
