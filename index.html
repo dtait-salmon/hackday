@@ -30,12 +30,12 @@
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                     <h4 class="modal-title" id="myModalLabel">Tagging Form</h4>
                 </div>
-                <form name="jsonForm" action="code/submitJSON.php" method="post">
+                <form name="jsonForm" id="jsonForm" action="code/submitJSON.php" method="post">
                     <div class="modal-body">
                         <!-- Hidden Fields -->
                         <input type="hidden" name="url" id="urlInput" />
                         <input type="hidden" name="jsonStr" id="jsonInput" />
-                        <input type="hidden" value="submit" />
+
                         <!-- General Tags Panel -->
                         <div class="panel-group" id="formAccordion" role="tablist" aria-multiselectable="true">
                             <div class="panel panel-default">
@@ -106,16 +106,16 @@
                                 <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="sectionTwo">
                                     <div class="panel-body">
                                         <div class="form-group">
-                                            <label for="aggregate_rating_type">Type</label>
-                                            <input type="text" class="form-control" id="aggregate_rating_type">
+                                            <label for="aggregateRating_type">Type</label>
+                                            <input type="text" class="form-control" id="aggregateRating_type">
                                         </div>
                                         <div class="form-group">
-                                            <label for="aggregate_rating_value">Rating Value</label>
-                                            <input type="text" class="form-control" id="aggregate_rating_value">
+                                            <label for="aggregateRating_ratingValue">Rating Value</label>
+                                            <input type="text" class="form-control" id="aggregateRating_ratingValue">
                                         </div>
                                         <div class="form-group">
-                                            <label for="aggregate_rating_review_count">Review Count</label>
-                                            <input type="text" class="form-control" id="aggregate_rating_review_count">
+                                            <label for="aggregateRating_reviewCount">Review Count</label>
+                                            <input type="text" class="form-control" id="aggregateRating_reviewCount">
                                         </div>
                                     </div>
                                 </div>
@@ -138,47 +138,47 @@
                                             <input type="text" class="form-control" id="offers_type">
                                         </div>
                                         <div class="form-group">
-                                            <label for="offers_price_currency">Price Currency</label>
-                                            <input type="text" class="form-control" id="offers_price_currency">
+                                            <label for="offers_priceCurrency">Price Currency</label>
+                                            <input type="text" class="form-control" id="offers_priceCurrency">
                                         </div>
                                         <div class="form-group">
-                                            <label for="aggregate_price">Price</label>
-                                            <input type="text" class="form-control" id="aggregate_price">
+                                            <label for="offers_price">Price</label>
+                                            <input type="text" class="form-control" id="offers_price">
                                         </div>
                                         <div class="form-group">
-                                            <label for="aggregate_price_valid_until">Price Valid Until</label>
-                                            <input type="text" class="form-control" id="aggregate_price_valid_until">
+                                            <label for="offers_priceValidUntil">Price Valid Until</label>
+                                            <input type="text" class="form-control" id="offers_priceValidUntil">
                                         </div>
                                         <div class="form-group">
-                                            <label for="aggregate_price_item_condition">Item Condition</label>
+                                            <label for="offers_itemCondition">Item Condition</label>
                                             <div class="row">
                                                 <div class="col-xs-3">
                                                     <span>http://schema.org/</span>
                                                 </div>
                                                 <div class="col-xs-9">
-                                                    <input type="text" class="form-control" id="aggregate_price_item_condition">
+                                                    <input type="text" class="form-control" id="offers_itemCondition">
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="form-group">
-                                            <label for="aggregate_price_item_availability">Item Availability</label>
+                                            <label for="offers_availability">Item Availability</label>
                                             <div class="row">
                                                 <div class="col-xs-3">
                                                     <span>http://schema.org/</span>
                                                 </div>
                                                 <div class="col-xs-9">
-                                                    <input type="text" class="form-control" id="aggregate_price_item_availability">
+                                                    <input type="text" class="form-control" id="offers_availability">
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="form-group sellerGroup">
                                             <div class="form-group">
-                                                <label for="seller_type">Seller Type</label>
-                                                <input type="text" class="form-control" id="brand_type">
+                                                <label for="offers_seller_type">Seller Type</label>
+                                                <input type="text" class="form-control" id="offers_seller_type">
                                             </div>
                                             <div class="form-group">
-                                                <label for="seller_name">Seller Name</label>
-                                                <input type="text" class="form-control" id="seller_name">
+                                                <label for="offers_seller_name">Seller Name</label>
+                                                <input type="text" class="form-control" id="offers_seller_name">
                                             </div>
                                         </div>
                                     </div>
@@ -186,8 +186,8 @@
                             </div>
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-default btn-secondary" data-dismiss="modal">Close</button>
-                            <button type="submit" class="btn btn-default btn-primary" data-dismiss="modal">Submit</button>
+                            <button type="button" class="btn btn-default btn-secondary" data-dismiss="modal" id="closeModal">Close</button>
+                            <button type="submit" class="btn btn-default btn-primary" data-dismiss="modal" id="submitButton">Submit</button>
                         </div>
                     </div>
                 </form>
