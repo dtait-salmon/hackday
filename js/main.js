@@ -64,7 +64,7 @@ var hackday = hackday || {};
           }
         };
 
-        console.log(JSON.stringify(jsonStruc));
+        //console.log(JSON.stringify(jsonStruc));
 
       },
       /**
@@ -73,9 +73,9 @@ var hackday = hackday || {};
       populateHiddenFields: function () {
         // url
         // json object
-        form.find('input[id="urlInput"]').val(window.location);
-        JSON.parse(jsonStruc);
-        //form.find('input[id="jsonInput"]').val(JSON.parse(jsonStruc));
+
+        //JSON.stringify(jsonStruc);
+        form.find('input[id="jsonInput"]').val(JSON.stringify(jsonStruc));
 
       },
       resetForm: function(){
@@ -86,6 +86,11 @@ var hackday = hackday || {};
     // public methods
     var api = {
       init: function () {
+
+        $('#urlList li a').on('click', function(){
+          // grab url and put in hidden field
+          form.find('input[id="urlInput"]').val($(this).val());
+        });
 
         $('#submitButton').on('click', function(e){
           e.preventDefault();
