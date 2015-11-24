@@ -16,86 +16,95 @@ $(document).ready(function(){
   });
 });
 
-//{
-//  "@context": "http://schema.org/",
-//    "@type": "Product",
-//    "name": "Executive Anvil",
-//    "image": "http://www.example.com/anvil_executive.jpg",
-//    "description": "Sleeker than ACME's Classic Anvil, the Executive Anvil is perfect for the business traveler looking for something to drop from a height.",
-//    "mpn": "925872",
-//    "brand": {
-//  "@type": "Thing",
-//      "name": "ACME"
-//},
-//  "aggregateRating": {
-//  "@type": "AggregateRating",
-//      "ratingValue": "4.4",
-//      "reviewCount": "89"
-//},
-//  "offers": {
-//  "@type": "Offer",
-//      "priceCurrency": "USD",
-//      "price": "119.99",
-//      "priceValidUntil": "2020-11-05",
-//      "itemCondition": "http://schema.org/UsedCondition",
-//      "availability": "http://schema.org/InStock",
-//      "seller": {
-//    "@type": "Organization",
-//        "name": "Executive Objects"
-//  }
-//}
-}
 
 var hackday = hackday || {};
 
 ;(function(doc, win, $){
 
   // private members
-var hackday = (function(){
-  var methods = {
-    /**
-     *
-     */
-    validateFields: function(){
+  hackday = (function () {
 
-    },
-    /**
-     *
-     */
-    getJason: function(){
+    var jsonStruc;
 
-    },
-    /**
-     *
-     */
-    populateHiddenFields: function(){
-      // get field values
-      var form = 'jsonForm';
+    var methods = {
+      /**
+       *
+       */
+      setJasonValues: function () {
 
-      var inputs = $(form).find('input').not('input[type="hidden"]');
+        // get field values
+        var form = $('#jsonForm');
 
-      input.each(function(){
-        var $this = this;
+        jsonStruc = {
+          "@context": "http://schema.org/" + form.find('input[id="context"]'),
+          "@type": form.find('input[id="product"]'),
+          "name": form.find('input[id="name"]'),
+          "image": form.find('input[id="image"]'),
+          "description": form.find('input[id="description"]'),
+          "mpn": form.find('input[id="mpn"]'),
+          "brand": {
+            "@type": form.find('input[id="brand_type"]'),
+            "name": form.find('input[id="brand_name"]')
+          },
+          "aggregateRating": {
+            "@type": form.find('input[id="aggregateRating_type"]'),
+            "ratingValue": form.find('input[id="aggregateRating_ratingValue"]'),
+            "reviewCount": form.find('input[id="aggregateRating_reviewCount"]')
+          },
+          "offers": {
+            "@type": form.find('input[id="offers_type"]'),
+            "priceCurrency": form.find('input[id="offers_priceCurrency"]'),
+            "price": form.find('input[id="offers_price"]'),
+            "priceValidUntil": form.find('input[id="offers_priceValidUntil"]'),
+            "itemCondition": "http://schema.org/" + form.find('input[id="offers_itemCondition"]'),
+            "availability": "http://schema.org/" + form.find('input[id="offers_availability"]'),
+            "seller": {
+              "@type": form.find('input[id="seller_type"]'),
+              "name": form.find('input[id="seller_name"]')
+            }
+          }
+        };
 
-      })
+        console.log(jsonStruc);
 
+        //
+        //
+        //var inputs = $(form).find('input').not('input[type="hidden"]').not('input[type="submit"]');
+        //
+        //inputs.each(function () {
+        //  var $this = this;
+        //
+        //
+        //})
+
+
+      },
+      /**
+       *
+       */
+      populateHiddenFields: function () {
+
+
+      }
+    };
+
+    // public methods
+    var api = {
+      init: function () {
+        methods.setJasonValues();
+        methods.populateHiddenFields();
+
+        return;
+      }
     }
-  };
 
-  // public methods
-  var api = {
-    init: function(){
-      return;
+
+    return {
+      init: api.init
     }
-  }
 
+  })();
 
-  return {
-    init: init
-  }
-
-})()
+  hackday.init();
 
 })(document, window, $);
-
-
