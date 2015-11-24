@@ -1,43 +1,205 @@
 <!doctype html>
 <html class="no-js" lang="">
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="x-ua-compatible" content="ie=edge">
-        <title></title>
-        <meta name="description" content="">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <link rel="apple-touch-icon" href="apple-touch-icon.png">
-        <!-- Place favicon.ico in the root directory -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title></title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="apple-touch-icon" href="apple-touch-icon.png">
+    <!-- Place favicon.ico in the root directory -->
+    <link rel="stylesheet" href="css/normalize.css">
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <script src="js/vendor/modernizr-2.8.3.min.js"></script>
+</head>
 
-        <link rel="stylesheet" href="css/normalize.css">
-        <link rel="stylesheet" href="css/main.css">
-        <script src="js/vendor/modernizr-2.8.3.min.js"></script>
-    </head>
-    <body>
-        <!--[if lt IE 8]>
+<body>
+    <!--[if lt IE 8]>
             <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->
-
-        <!-- Add your site or application content here -->
-        <p>Hello world! This is HTML5 Boilerplate.</p>
-        <ul id="urlList"></ul>
-
-		<form id="jsonForm" action="code/submitJSON.php" method="post">
-
-            <input type="text" value="test1_value" name="test1" id="test1"/>
-            <input type="text" value="test2_value" name="test2" id="test2"/>
-            <input type="text" value="test3_value" name="test3" id="test3"/>
-
-			<input type="text" name="url" id="urlInput"/>
-			<input type="text" name="jsonStr" id="jsonInput"/>
-			<input type="submit" value="submit" />
-		</form>
-
+    <!-- Add your site or application content here -->
+    <p>Hello world! This is HTML5 Boilerplate.</p>
+    <ul id="urlList"></ul>
+    <!-- Modal -->
+    <div class="modal fade" id="jsonModal" tabindex="-1" role="dialog" aria-labelledby="jsonModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">Tagging Form</h4>
+                </div>
+                <form name="jsonForm" action="code/submitJSON.php" method="post">
+                    <div class="modal-body">
+                        <!-- Hidden Fields -->
+                        <input type="hidden" name="url" id="urlInput" />
+                        <input type="hidden" name="jsonStr" id="jsonInput" />
+                        <input type="hidden" value="submit" />
+                        <!-- General Tags Panel -->
+                        <div class="panel-group" id="formAccordion" role="tablist" aria-multiselectable="true">
+                            <div class="panel panel-default">
+                                <div class="panel-heading" role="tab">
+                                    <h4 class="panel-title">
+                                        <a role="button" data-toggle="collapse" data-parent="#formAccordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                          General
+                                        </a>
+                                    </h4>
+                                </div>
+                                <div id="collapseOne" class="panel-collapse collapse" role="tabpanel" aria-labelledby="sectionOne">
+                                    <div class="panel-body">
+                                        <div class="form-group">
+                                            <label for="context">Context</label>
+                                            <div class="row">
+                                                <div class="col-xs-3">
+                                                    <span>http://schema.org/</span>
+                                                </div>
+                                                <div class="col-xs-9">
+                                                    <input type="text" class="form-control" id="context">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="type">Type</label>
+                                            <input type="text" class="form-control" id="type">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="name">Name</label>
+                                            <input type="text" class="form-control" id="name">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="image">Image</label>
+                                            <input type="text" class="form-control" id="image">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="description">Description</label>
+                                            <input type="text" class="form-control" id="description">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="mpn">MPN</label>
+                                            <input type="text" class="form-control" id="mpn">
+                                        </div>
+                                        <div class="form-group brandGroup">
+                                            <div class="form-group">
+                                                <label for="brand_type">Brand Type</label>
+                                                <input type="text" class="form-control" id="brand_type">
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="brand_name">Brand Name</label>
+                                                <input type="text" class="form-control" id="brand_name">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Aggregate Rating Panel -->
+                        <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+                            <div class="panel panel-default">
+                                <div class="panel-heading" role="tab" id="sectionOne">
+                                    <h4 class="panel-title">
+                                        <a role="button" data-toggle="collapse" data-parent="#formAccordion" href="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+                                          Aggregate Rating
+                                        </a>
+                                    </h4>
+                                </div>
+                                <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="sectionTwo">
+                                    <div class="panel-body">
+                                        <div class="form-group">
+                                            <label for="aggregate_rating_type">Type</label>
+                                            <input type="text" class="form-control" id="aggregate_rating_type">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="aggregate_rating_value">Rating Value</label>
+                                            <input type="text" class="form-control" id="aggregate_rating_value">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="aggregate_rating_review_count">Review Count</label>
+                                            <input type="text" class="form-control" id="aggregate_rating_review_count">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Offers Panel -->
+                        <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+                            <div class="panel panel-default">
+                                <div class="panel-heading" role="tab" id="sectionOne">
+                                    <h4 class="panel-title">
+                                        <a role="button" data-toggle="collapse" data-parent="#formAccordion" href="#collapseThree" aria-expanded="true" aria-controls="collapseTwo">
+                                          Offers
+                                        </a>
+                                    </h4>
+                                </div>
+                                <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="sectionThree">
+                                    <div class="panel-body">
+                                        <div class="form-group">
+                                            <label for="offers_type">Type</label>
+                                            <input type="text" class="form-control" id="offers_type">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="offers_price_currency">Price Currency</label>
+                                            <input type="text" class="form-control" id="offers_price_currency">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="aggregate_price">Price</label>
+                                            <input type="text" class="form-control" id="aggregate_price">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="aggregate_price_valid_until">Price Valid Until</label>
+                                            <input type="text" class="form-control" id="aggregate_price_valid_until">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="aggregate_price_item_condition">Item Condition</label>
+                                            <div class="row">
+                                                <div class="col-xs-3">
+                                                    <span>http://schema.org/</span>
+                                                </div>
+                                                <div class="col-xs-9">
+                                                    <input type="text" class="form-control" id="aggregate_price_item_condition">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="aggregate_price_item_availability">Item Availability</label>
+                                            <div class="row">
+                                                <div class="col-xs-3">
+                                                    <span>http://schema.org/</span>
+                                                </div>
+                                                <div class="col-xs-9">
+                                                    <input type="text" class="form-control" id="aggregate_price_item_availability">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group sellerGroup">
+                                            <div class="form-group">
+                                                <label for="seller_type">Seller Type</label>
+                                                <input type="text" class="form-control" id="brand_type">
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="seller_name">Seller Name</label>
+                                                <input type="text" class="form-control" id="seller_name">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default btn-secondary" data-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-default btn-primary" data-dismiss="modal">Submit</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-        <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.11.3.min.js"><\/script>')</script>
+        <script>
+        window.jQuery || document.write('<script src="js/vendor/jquery-1.11.3.min.js"><\/script>')
+        </script>
         <script src="js/plugins.js"></script>
         <script src="js/main.js"></script>
+        <script src="js/bootstrap.js"></script>
+</body>
 
-    </body>
 </html>
