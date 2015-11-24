@@ -11,7 +11,6 @@ var formValidator = (function() {
         .formValidation({
             framework: 'bootstrap',
             live: 'enabled',
-            trigger: 'blur',
             icon: {
                 valid: 'glyphicon glyphicon-ok',
                 invalid: 'glyphicon glyphicon-remove',
