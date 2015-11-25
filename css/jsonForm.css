@@ -67,3 +67,7 @@
     vertical-align: middle;
     margin: 0 16px;
 }
+
+.row .form-control-feedback {
+	right: 15px;
+}
