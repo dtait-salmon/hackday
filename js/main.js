@@ -1,137 +1,125 @@
-$(document).ready(function() {
+$(document).ready(function(){
+  $.getJSON("code/requestItems.php", function(result){
+      $.each(result, function(i){
+        $('#urlList').append('<li><a data-toggle="modal" data-target="#jsonModal" href="#" data-value="'+ result[i].jsonld +'">'+ result[i].url +'</a></li>');
+      });
+  });
 
-    var monthNames = [
-        "January", "February", "March",
-        "April", "May", "June", "July",
-        "August", "September", "October",
-        "November", "December"
-    ];
+  $('#urlList').on('click', 'a', function(e){
+    e.preventDefault();
 
-    var date = new Date();
-    var day = date.getDate();
-    var monthIndex = date.getMonth();
-    var year = date.getFullYear();
+    var url = $(this).text();
+    var jsonStr = $(this).attr('data-value');
 
-    $.getJSON("code/requestItems.php", function(result) {
-        $.each(result, function(i) {
-            $('#urlList').append('<li><a data-toggle="modal" data-target="#jsonModal" href="#" data-value="' + result[i].jsonld + '">' + result[i].url + '</a></li>');
-        });
-    });
-
-    $('#urlList').on('click', 'a', function(e) {
-        e.preventDefault();
-
-        var url = $(this).text();
-        var jsonStr = $(this).attr('data-value');
-
-        $('#urlInput').val(url);
-        $('#jsonInput').val(jsonStr);
-    });
-    $("#datetimepicker").datetimepicker({
-        format: "dd MM yyyy",
-        autoclose: true,
-        todayBtn: true,
-        pickerPosition: "bottom",
-        minView: 2,
-        todayHighlight: true,
-        startView: 4
-    });
-
-    $('#jsonModal').on('shown.bs.modal', function(e) {
-        document.getElementById('aggregate_price_valid_until').value = day + ' ' + monthNames[monthIndex] + ' ' + year;
-    })
+    $('#urlInput').val(url);
+    $('#jsonInput').val(jsonStr);
+  });
 });
 
 
 var hackday = hackday || {};
 
-;
-(function(doc, win, $) {
+;(function(doc, win, $){
 
-    // private members
-    hackday = (function() {
+  // private members
+  hackday = (function () {
 
-        var jsonStruc;
+    var jsonStruc;
+    var form = $('#jsonForm');
 
-        var methods = {
-            /**
-             *
-             */
-            setJasonValues: function() {
+    var methods = {
+      /**
+       *
+       */
+      setJasonValues: function () {
 
-                // get field values
-                var form = $('#jsonForm');
-
-                jsonStruc = {
-                    "@context": "http://schema.org/" + form.find('input[id="context"]'),
-                    "@type": form.find('input[id="product"]'),
-                    "name": form.find('input[id="name"]'),
-                    "image": form.find('input[id="image"]'),
-                    "description": form.find('input[id="description"]'),
-                    "mpn": form.find('input[id="mpn"]'),
-                    "brand": {
-                        "@type": form.find('input[id="brand_type"]'),
-                        "name": form.find('input[id="brand_name"]')
-                    },
-                    "aggregateRating": {
-                        "@type": form.find('input[id="aggregateRating_type"]'),
-                        "ratingValue": form.find('input[id="aggregateRating_ratingValue"]'),
-                        "reviewCount": form.find('input[id="aggregateRating_reviewCount"]')
-                    },
-                    "offers": {
-                        "@type": form.find('input[id="offers_type"]'),
-                        "priceCurrency": form.find('input[id="offers_priceCurrency"]'),
-                        "price": form.find('input[id="offers_price"]'),
-                        "priceValidUntil": form.find('input[id="offers_priceValidUntil"]'),
-                        "itemCondition": "http://schema.org/" + form.find('input[id="offers_itemCondition"]'),
-                        "availability": "http://schema.org/" + form.find('input[id="offers_availability"]'),
-                        "seller": {
-                            "@type": form.find('input[id="seller_type"]'),
-                            "name": form.find('input[id="seller_name"]')
-                        }
-                    }
-                };
-
-                console.log(jsonStruc);
-
-                //
-                //
-                //var inputs = $(form).find('input').not('input[type="hidden"]').not('input[type="submit"]');
-                //
-                //inputs.each(function () {
-                //  var $this = this;
-                //
-                //
-                //})
-
-
-            },
-            /**
-             *
-             */
-            populateHiddenFields: function() {
-
-
+        // get field values
+        jsonStruc = {
+          "@context": "http://schema.org/" + form.find('input[id="context"]').val() || "",
+          "@type": form.find('input[id="type"]').val() || "",
+          "name": form.find('input[id="name"]').val() || "",
+          "image": form.find('input[id="image"]').val() || "",
+          "description": form.find('input[id="description"]').val() || "",
+          "mpn": form.find('input[id="mpn"]').val() || "",
+          "brand": {
+            "@type": form.find('input[id="brand_type"]').val() || "",
+            "name": form.find('input[id="brand_name"]').val() || ""
+          },
+          "aggregateRating": {
+            "@type": form.find('input[id="aggregateRating_type"]').val() || "",
+            "ratingValue": form.find('input[id="aggregateRating_ratingValue"]').val() || "",
+            "reviewCount": form.find('input[id="aggregateRating_reviewCount"]').val() || ""
+          },
+          "offers": {
+            "@type": form.find('input[id="offers_type"]').val() || "",
+            "priceCurrency": form.find('input[id="offers_priceCurrency"]').val() || "",
+            "price": form.find('input[id="offers_price"]').val() || "",
+            "priceValidUntil": form.find('input[id="offers_priceValidUntil"]').val() || "",
+            "itemCondition": "http://schema.org/" + form.find('input[id="offers_itemCondition"]').val() || "",
+            "availability": "http://schema.org/" + form.find('input[id="offers_availability"]').val() || "",
+            "seller": {
+              "@type": form.find('input[id="offers_seller_type"]').val() || "",
+              "name": form.find('input[id="offers_seller_name"]').val() || ""
             }
+          }
         };
 
-        // public methods
-        var api = {
-            init: function() {
-                methods.setJasonValues();
-                methods.populateHiddenFields();
+        //console.log(JSON.stringify(jsonStruc));
 
-                return;
-            }
-        }
+      },
+      /**
+       *
+       */
+      populateHiddenFields: function () {
+        // url
+        // json object
+        jsonStruc = JSON.stringify(jsonStruc);
+        jsonStruc = $.parseJSON(jsonStruc);
+
+        console.log(jsonStruc);
+
+        form.find('input[id="jsonInput"]').val(JSON.stringify(jsonStruc));
+
+      },
+      resetForm: function(){
+        form[0].reset();
+      }
+    };
+
+    // public methods
+    var api = {
+      init: function () {
+
+        $('#urlList li a').on('click', function(){
+          // grab url and put in hidden field
+          form.find('input[id="urlInput"]').val($(this).val());
+        });
+
+        $('#submitButton').on('click', function(e){
+          e.preventDefault();
+
+          methods.setJasonValues();
+          methods.populateHiddenFields();
+          methods.resetForm();
+
+          $(this).submit();
+        });
+
+        $('#closeModal').on('click', function(){
+          methods.resetForm();
+        });
+
+        return;
+      }
+    }
 
 
-        return {
-            init: api.init
-        }
+    return {
+      init: api.init
+    }
 
-    })();
+  })();
 
-    hackday.init();
+  hackday.init();
 
 })(document, window, $);
