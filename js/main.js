@@ -12,12 +12,6 @@ $(document).ready(function() {
     var monthIndex = date.getMonth();
     var year = date.getFullYear();
 
-    $.getJSON("code/requestItems.php", function(result) {
-        $.each(result, function(i) {
-            $('#urlList').append('<li><a data-toggle="modal" data-target="#jsonModal" href="#" data-value="' + result[i].jsonld + '">' + result[i].url + '</a></li>');
-        });
-    });
-
     $('#urlList').on('click', 'a', function(e) {
         e.preventDefault();
 
@@ -50,6 +44,7 @@ var hackday = hackday || {};
   hackday = (function () {
 
     var jsonStruc;
+    var currentUrl;
     var form = $('#jsonForm');
 
     var methods = {
@@ -89,8 +84,6 @@ var hackday = hackday || {};
           }
         };
 
-        //console.log(JSON.stringify(jsonStruc));
-
       },
       /**
        *
@@ -100,8 +93,6 @@ var hackday = hackday || {};
         // json object
         jsonStruc = JSON.stringify(jsonStruc);
         jsonStruc = $.parseJSON(jsonStruc);
-
-        console.log(jsonStruc);
 
         form.find('input[id="jsonInput"]').val(JSON.stringify(jsonStruc));
 
@@ -118,6 +109,7 @@ var hackday = hackday || {};
         $('#urlList li a').on('click', function(){
           // grab url and put in hidden field
           form.find('input[id="urlInput"]').val($(this).val());
+          currentUrl = $(this).val();
         });
 
         $('#submitButton').on('click', function(e){
@@ -127,7 +119,18 @@ var hackday = hackday || {};
           methods.populateHiddenFields();
           methods.resetForm();
 
-          $(this).submit();
+          var data = {
+            url: currentUrl,
+            jsonStr: JSON.stringify(jsonStruc)
+          }
+
+          jQuery.ajax({
+            method: "POST",
+            url: "code/submitJSON.php",
+            data: data
+          }).done(function(response) {
+            console.log(response);
+          });
         });
 
         $('#closeModal').on('click', function(){
