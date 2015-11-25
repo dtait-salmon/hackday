@@ -130,6 +130,7 @@ var hackday = hackday || {};
             url: "code/submitJSON.php",
             data: data
           }).done(function(response) {
+            $('#jsonModal').modal('hide');
             console.log(response);
           });
         });
