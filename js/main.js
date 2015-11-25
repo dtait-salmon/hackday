@@ -107,10 +107,11 @@ var hackday = hackday || {};
 
       init: function () {
 
-        $('#urlList li a').on('click', function(){
+        $('#urlList').on('click', 'td a', function(){
           // grab url and put in hidden field
-          form.find('input[id="urlInput"]').val($(this).val());
-          currentUrl = $(this).val();
+
+          $('#urlInput').val($(this).text());
+          currentUrl = $(this).text();
         });
 
         $('#submitButton').on('click', function(e){
@@ -124,6 +125,8 @@ var hackday = hackday || {};
             url: currentUrl,
             jsonStr: JSON.stringify(jsonStruc)
           }
+
+console.log(currentUrl);
 
           jQuery.ajax({
             method: "POST",
