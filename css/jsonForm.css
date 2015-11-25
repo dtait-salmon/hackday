@@ -26,3 +26,8 @@
 #jsonModal #jsonForm .panel-group {
 	clear: both;
 }
+
+/*Datepicker styling*/
+[class*=" datetimepicker-dropdown"]:before {
+	display: none !important;
+}

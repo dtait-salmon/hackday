@@ -14,6 +14,7 @@
     <link rel="stylesheet" href="css/bootstrap.css">
     <link rel="stylesheet" href="css/jsonForm.css">
     <link rel="stylesheet" href="css/formValidation.css">
+    <link rel="stylesheet" href="css/bootstrap-datetimepicker.css">
     <script src="js/vendor/modernizr-2.8.3.min.js"></script>
 </head>
 
@@ -141,8 +142,10 @@
                                                 <input data-fv-numeric="true" data-fv-numeric-message="This field must only consist of numeric characters" type="text" class="form-control" name="aggregate_price" id="aggregate_price">
                                             </div>
                                             <div class="form-group">
+                                            <div class="form-group input-append date" id="datetimepicker" data-date-format="dd-mm-yyyy" >
                                                 <label for="aggregate_price_valid_until">Price Valid Until</label>
                                                 <input type="text" class="form-control" id="aggregate_price_valid_until">
+                                                <span class="add-on"><i class="icon-th"></i></span>
                                             </div>
                                             <div class="form-group">
                                                 <label for="aggregate_price_item_condition">Item Condition</label>
@@ -198,6 +201,7 @@
         <script src="js/bootstrap.js"></script>
         <script src="js/formValidation.js"></script>
         <script src="js/customValidation.js"></script>
+        <script src="js/bootstrap-datetimepicker.js"></script>
 </body>
 
 </html>
