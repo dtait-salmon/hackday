@@ -104,6 +104,7 @@ var hackday = hackday || {};
 
     // public methods
     var api = {
+
       init: function () {
 
         $('#urlList li a').on('click', function(){
@@ -139,7 +140,7 @@ var hackday = hackday || {};
 
         return;
       }
-    }
+    };
 
 
     return {
