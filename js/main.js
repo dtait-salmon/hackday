@@ -108,10 +108,11 @@ var hackday = hackday || {};
 
             init: function() {
 
-                $('#urlList li a').on('click', function() {
+                $('#urlList').on('click', 'td a', function() {
                     // grab url and put in hidden field
-                    form.find('input[id="urlInput"]').val($(this).val());
-                    currentUrl = $(this).val();
+
+                    $('#urlInput').val($(this).text());
+                    currentUrl = $(this).text();
                 });
 
                 $('#jsonForm')
@@ -165,6 +166,7 @@ var hackday = hackday || {};
                     },
                 });
 
+
                 $('#submitButton').on('click', function(e) {
 
                     methods.setJasonValues();
@@ -176,12 +178,17 @@ var hackday = hackday || {};
                         jsonStr: JSON.stringify(jsonStruc)
                     }
 
+
                     jQuery.ajax({
                         method: "POST",
                         url: "code/submitJSON.php",
                         data: data
                     }).done(function(response) {
                         console.log(response);
+                        $('#jsonModal').modal('hide');
+                        $('.form-group').removeClass("has-success");
+                        $('.form-control-feedback').removeClass("glyphicon").removeClass("glyphicon-ok");
+                        $('.panel-collapse').collapse('hide');
                     });
                 });
 
