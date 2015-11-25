@@ -4,7 +4,7 @@
 include 'connect.php';
 
 $url = $_POST["url"];
-$sql = "SELECT jsonld FROM pages WHERE url = '". $url . "'";
+$sql = "SELECT jsonld FROM pages WHERE url LIKE '%". $url . "'";
 mysql_select_db($dbname);
 $retval = mysql_query($sql, $conn );
 

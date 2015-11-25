@@ -10,8 +10,9 @@ schemaTools.controller = {
     jQuery.ajax({
       method: "POST",
       url: "http://127.0.0.1:8888/schematools/hackday/code/requestJSON.php",
-      data: { url:  window.location.toString().replace(':8888', '') }
+      data: { url:  window.location.pathname.toString() }
     }).done(function(response) {
+      console.log(response);
       self.renderSchema(response);
     });
   },
