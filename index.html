@@ -28,7 +28,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title" id="myModalLabel">JSON Form</h4>
+                    <h4 class="modal-title" id="myModalLabel">Tagging Form</h4>
                 </div>
                 <form name="jsonForm" action="code/submitJSON.php" method="post">
                     <div class="modal-body">
@@ -36,12 +36,13 @@
                         <input type="hidden" name="url" id="urlInput" />
                         <input type="hidden" name="jsonStr" id="jsonInput" />
                         <input type="hidden" value="submit" />
-                        <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+                        <!-- General Tags Panel -->
+                        <div class="panel-group" id="formAccordion" role="tablist" aria-multiselectable="true">
                             <div class="panel panel-default">
-                                <div class="panel-heading" role="tab" id="sectionOne">
+                                <div class="panel-heading" role="tab">
                                     <h4 class="panel-title">
-                                        <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                                          General Tags
+                                        <a role="button" data-toggle="collapse" data-parent="#formAccordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                          General
                                         </a>
                                     </h4>
                                 </div>
@@ -49,7 +50,14 @@
                                     <div class="panel-body">
                                         <div class="form-group">
                                             <label for="context">Context</label>
-                                            <input type="text" class="form-control" id="context">
+                                            <div class="row">
+                                                <div class="col-xs-3">
+                                                    <span>http://schema.org/</span>
+                                                </div>
+                                                <div class="col-xs-9">
+                                                    <input type="text" class="form-control" id="context">
+                                                </div>
+                                            </div>
                                         </div>
                                         <div class="form-group">
                                             <label for="type">Type</label>
@@ -71,7 +79,7 @@
                                             <label for="mpn">MPN</label>
                                             <input type="text" class="form-control" id="mpn">
                                         </div>
-                                        <div class="form-group">
+                                        <div class="form-group brandGroup">
                                             <div class="form-group">
                                                 <label for="brand_type">Brand Type</label>
                                                 <input type="text" class="form-control" id="brand_type">
@@ -79,6 +87,98 @@
                                             <div class="form-group">
                                                 <label for="brand_name">Brand Name</label>
                                                 <input type="text" class="form-control" id="brand_name">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Aggregate Rating Panel -->
+                        <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+                            <div class="panel panel-default">
+                                <div class="panel-heading" role="tab" id="sectionOne">
+                                    <h4 class="panel-title">
+                                        <a role="button" data-toggle="collapse" data-parent="#formAccordion" href="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+                                          Aggregate Rating
+                                        </a>
+                                    </h4>
+                                </div>
+                                <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="sectionTwo">
+                                    <div class="panel-body">
+                                        <div class="form-group">
+                                            <label for="aggregate_rating_type">Type</label>
+                                            <input type="text" class="form-control" id="aggregate_rating_type">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="aggregate_rating_value">Rating Value</label>
+                                            <input type="text" class="form-control" id="aggregate_rating_value">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="aggregate_rating_review_count">Review Count</label>
+                                            <input type="text" class="form-control" id="aggregate_rating_review_count">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Offers Panel -->
+                        <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+                            <div class="panel panel-default">
+                                <div class="panel-heading" role="tab" id="sectionOne">
+                                    <h4 class="panel-title">
+                                        <a role="button" data-toggle="collapse" data-parent="#formAccordion" href="#collapseThree" aria-expanded="true" aria-controls="collapseTwo">
+                                          Offers
+                                        </a>
+                                    </h4>
+                                </div>
+                                <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="sectionThree">
+                                    <div class="panel-body">
+                                        <div class="form-group">
+                                            <label for="offers_type">Type</label>
+                                            <input type="text" class="form-control" id="offers_type">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="offers_price_currency">Price Currency</label>
+                                            <input type="text" class="form-control" id="offers_price_currency">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="aggregate_price">Price</label>
+                                            <input type="text" class="form-control" id="aggregate_price">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="aggregate_price_valid_until">Price Valid Until</label>
+                                            <input type="text" class="form-control" id="aggregate_price_valid_until">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="aggregate_price_item_condition">Item Condition</label>
+                                            <div class="row">
+                                                <div class="col-xs-3">
+                                                    <span>http://schema.org/</span>
+                                                </div>
+                                                <div class="col-xs-9">
+                                                    <input type="text" class="form-control" id="aggregate_price_item_condition">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="aggregate_price_item_availability">Item Availability</label>
+                                            <div class="row">
+                                                <div class="col-xs-3">
+                                                    <span>http://schema.org/</span>
+                                                </div>
+                                                <div class="col-xs-9">
+                                                    <input type="text" class="form-control" id="aggregate_price_item_availability">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group sellerGroup">
+                                            <div class="form-group">
+                                                <label for="seller_type">Seller Type</label>
+                                                <input type="text" class="form-control" id="brand_type">
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="seller_name">Seller Name</label>
+                                                <input type="text" class="form-control" id="seller_name">
                                             </div>
                                         </div>
                                     </div>
