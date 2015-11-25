@@ -1,7 +1,7 @@
 <?php
    $dbhost = 'localhost';
    $dbuser = 'root';
-   $dbpass = '';
+   $dbpass = 'root';
    $dbname = "schematools";
 
    $conn = mysql_connect($dbhost, $dbuser, $dbpass);

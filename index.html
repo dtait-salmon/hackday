@@ -23,7 +23,6 @@
             <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->
     <!-- Add your site or application content here -->
-    <p>Hello world! This is HTML5 Boilerplate.</p>
     <ul id="urlList"></ul>
     <!-- Modal -->
     <div class="modal fade" id="jsonModal" tabindex="-1" role="dialog" aria-labelledby="jsonModalLabel">
@@ -106,15 +105,15 @@
                                         <div class="panel-body">
                                             <div class="form-group">
                                                 <label for="aggregate_rating_type">Type</label>
-                                                <input type="text" class="form-control" id="aggregate_rating_type">
+                                                <input type="text" class="form-control" id="aggregate_ratingType">
                                             </div>
                                             <div class="form-group">
                                                 <label for="aggregate_rating_value">Rating Value</label>
-                                                <input data-fv-numeric="true" data-fv-numeric-message="This field must only consist of numeric characters" type="text" class="form-control" name="aggregate_rating_value" id="aggregate_rating_value">
+                                                <input data-fv-numeric="true" data-fv-numeric-message="This field must only consist of numeric characters" type="text" class="form-control" name="aggregate_rating_value" id="aggregateRating_ratingValue">
                                             </div>
                                             <div class="form-group">
                                                 <label for="aggregate_rating_review_count">Review Count</label>
-                                                <input data-fv-numeric="true" data-fv-numeric-message="This field must only consist of numeric characters" type="text" class="form-control" name="aggregate_rating_review_count" id="aggregate_rating_review_count">
+                                                <input data-fv-numeric="true" data-fv-numeric-message="This field must only consist of numeric characters" type="text" class="form-control" name="aggregate_rating_review_count" id="aggregateRating_reviewCount">
                                             </div>
                                         </div>
                                     </div>
@@ -135,7 +134,7 @@
                                             </div>
                                             <div class="form-group">
                                                 <label for="offers_price_currency">Price Currency</label>
-                                                <input type="text" class="form-control" id="offers_price_currency">
+                                                <input type="text" class="form-control" id="offers_priceCurrency">
                                             </div>
                                             <div class="form-group">
                                                 <label for="aggregate_price">Price</label>
@@ -144,7 +143,7 @@
                                             <div class="form-group">
                                             <div class="form-group input-append date" id="datetimepicker" data-date-format="dd-mm-yyyy" >
                                                 <label for="aggregate_price_valid_until">Price Valid Until</label>
-                                                <input type="text" class="form-control" id="aggregate_price_valid_until">
+                                                <input type="text" class="form-control" id="aggregate_priceValidUntil">
                                                 <span class="add-on"><i class="icon-th"></i></span>
                                             </div>
                                             <div class="form-group">
@@ -184,8 +183,8 @@
                                 </div>
                             </div>
                             <div class="modal-footer">
-                                <button type="button" class="btn btn-default btn-secondary" data-dismiss="modal">Close</button>
-                                <button type="submit" class="btn btn-default btn-primary" data-dismiss="modal">Submit</button>
+                                <button type="button" class="btn btn-default btn-secondary" data-dismiss="modal" id="closeModal">Close</button>
+                                <input type="submit" class="btn btn-default btn-primary" id="submitButton">
                             </div>
                         </div>
                     </div>

@@ -1,21 +1,46 @@
-$(document).ready(function(){
-  $.getJSON("code/requestItems.php", function(result){
-      $.each(result, function(i){
-        $('#urlList').append('<li><a data-toggle="modal" data-target="#jsonModal" href="#" data-value="'+ result[i].jsonld +'">'+ result[i].url +'</a></li>');
-      });
-  });
+$(document).ready(function() {
 
-  $('#urlList').on('click', 'a', function(e){
-    e.preventDefault();
+    var monthNames = [
+        "January", "February", "March",
+        "April", "May", "June", "July",
+        "August", "September", "October",
+        "November", "December"
+    ];
 
-    var url = $(this).text();
-    var jsonStr = $(this).attr('data-value');
+    var date = new Date();
+    var day = date.getDate();
+    var monthIndex = date.getMonth();
+    var year = date.getFullYear();
 
-    $('#urlInput').val(url);
-    $('#jsonInput').val(jsonStr);
-  });
+    $.getJSON("code/requestItems.php", function(result) {
+        $.each(result, function(i) {
+            $('#urlList').append('<li><a data-toggle="modal" data-target="#jsonModal" href="#" data-value="' + result[i].jsonld + '">' + result[i].url + '</a></li>');
+        });
+    });
+
+    $('#urlList').on('click', 'a', function(e) {
+        e.preventDefault();
+
+        var url = $(this).text();
+        var jsonStr = $(this).attr('data-value');
+
+        $('#urlInput').val(url);
+        $('#jsonInput').val(jsonStr);
+    });
+    $("#datetimepicker").datetimepicker({
+        format: "dd MM yyyy",
+        autoclose: true,
+        todayBtn: true,
+        pickerPosition: "bottom",
+        minView: 2,
+        todayHighlight: true,
+        startView: 4
+    });
+
+    $('#jsonModal').on('shown.bs.modal', function(e) {
+        document.getElementById('aggregate_priceValidUntil').value = day + ' ' + monthNames[monthIndex] + ' ' + year;
+    })
 });
-
 
 var hackday = hackday || {};
 
