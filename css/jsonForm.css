@@ -1,0 +1,28 @@
+/*Accordion styling*/
+.accordion .panel-heading {
+	display: block;
+	overflow: hidden;
+}
+.accordion .panel-heading:hover,
+.accordion .panel-heading:focus {
+	text-decoration: none;
+}
+.accordion .panel-heading h4{
+	float: left; 
+}
+.accordion .panel-heading .glyphicon-chevron-down {
+	float: right;
+	margin: 2px 0;
+}
+
+/*Form styling*/
+#jsonModal #jsonForm .inputPrefix {
+	margin: 6px 0;
+	display: block;
+}
+#jsonModal #jsonForm .requiredNote {
+	margin-bottom: 10px;
+}
+#jsonModal #jsonForm .panel-group {
+	clear: both;
+}
