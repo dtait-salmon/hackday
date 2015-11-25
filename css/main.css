@@ -281,5 +281,14 @@ textarea {
 
 
 #urlList {
-  margin-top: 80px;
+  margin-top: 100px;
+}
+.navbar .container {
+  padding: 10px;
+}
+.navbar .container img,
+.navbar .container span {
+  display: inline-block;
+  vertical-align: middle;
+  margin: 0 16px;
 }
