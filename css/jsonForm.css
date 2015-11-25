@@ -18,6 +18,16 @@
     float: right;
     margin: 2px 0;
 }
+.accordion .panel-heading:before {
+	font-family: ''Glyphicons Halflings'';
+	float: right;
+}
+.accordion .panel-heading:before {
+	content: "\e114";
+}
+.accordion .panel-heading[aria-expanded="true"]:before {
+	content: "\e113";
+}
 
 
 /*Form styling*/
