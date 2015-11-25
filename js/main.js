@@ -105,19 +105,13 @@ var hackday = hackday || {};
             jsonStr: JSON.stringify(jsonStruc)
           }
 
-          // send back to server (ajax)
-          $.ajax({
-            type: "POST",
-            url: 'code/submitJSON.php',
-            data: data,
-            success: function(response){
-              console.log(response);
-              //$('#jsonForm').modal('hide');
-            },
-
-            dataType: 'jsonp'
+          jQuery.ajax({
+            method: "POST",
+            url: "code/submitJSON.php",
+            data: data
+          }).done(function(response) {
+            console.log(response);
           });
-
         });
 
         $('#closeModal').on('click', function(){
